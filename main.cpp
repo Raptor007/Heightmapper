@@ -51,7 +51,7 @@ int main( int argc, char **argv )
 	
 	std::map< int, std::map< int, double > > heights;
 	std::map< int, std::map< int, int > > indices;
-	Uint8 r = 0, g = 0, b = 0;
+	Uint8 r = 0, g = 0, b = 0, a = 0;
 	int index = 0;
 	
 	// Read pixels into heights.
@@ -63,7 +63,8 @@ int main( int argc, char **argv )
 			r = ((Uint8*)( surface->pixels ))[ index * 4 ];
 			g = ((Uint8*)( surface->pixels ))[ index * 4 + 1 ];
 			b = ((Uint8*)( surface->pixels ))[ index * 4 + 2 ];
-			heights[ x ][ y ] = (r * 0.3 + g * 0.59 + b * 0.11) / 255.;
+			a = ((Uint8*)( surface->pixels ))[ index * 4 + 3 ];
+			heights[ x ][ y ] = (r * 0.3 + g * 0.59 + b * 0.11) * a / (255. * 255.);
 			indices[ x ][ y ] = index + 1;
 		}
 	}
