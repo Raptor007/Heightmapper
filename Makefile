@@ -60,19 +60,7 @@ endif
 endif
 
 # Override LIB specified above for Linux.
-LIB =
-
-ifndef FRAMEWORKS_INSTEAD_OF_LIBS
-# By default, statically-link as many libraries as possible from MacPorts.
-LIB += libSDL_image.a libSDL.a libSDLmain.a
-else
-# When building for 10.4 Tiger on a newer system without compatible libs, we might need to use SDLMain.m and Frameworks instead.
-SOURCES += ../RaptorEngine/Core/SDLMain.m
-MAC_FRAMEWORKS += SDL_image SDL
-endif
-
-# These libraries should always be statically-linked.
-LIB += libpng.a libtiff.a libXrandr.a libXrender.a libXext.a libX11.a libxcb.a libXdmcp.a libXau.a libjpeg.a libbz2.a liblzma.a libz.a
+LIB = libSDL_image.a libSDL.a libSDLmain.a libpng.a libtiff.a libXrandr.a libXrender.a libXext.a libX11.a libxcb.a libXdmcp.a libXau.a libjpeg.a libbz2.a liblzma.a libz.a
 
 # Macs don't have .so files, so replace with .a files.
 LIBRARIES := $(patsubst %.so,%.a,$(LIBRARIES))
@@ -105,7 +93,7 @@ $(EXE): $(OBJECTS)
 objects: $(SOURCES) $(OBJECTS)
 
 clean:
-	rm -rf *.o "$(EXE)"
+	rm -rf *.o "$(EXE)" "$(EXE)"_*
 
 ppc:
 	make objects ARCH="ppc"
